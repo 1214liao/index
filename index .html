@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慈濟大學 經營管理學系 | Department of Business and Management, Tzu Chi University</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tzuchi: {
+                            emerald: '#0d7a5f',
+                            teal: '#14b8a6',
+                            mint: '#a7f3d0',
+                            slate: '#0f172a',
+                            lightBg: '#f8fafc',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'PingFang TC', 'Microsoft JhengHei', 'sans-serif'],
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 淺色極致玻璃擬物風格 (Light Glassmorphism) */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+        }
+        
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card-hover:hover {
+            background: rgba(255, 255, 255, 0.85);
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px 0 rgba(13, 122, 95, 0.12);
+            border-color: rgba(13, 122, 95, 0.2);
+        }
+
+        .glass-nav {
+            background: rgba(248, 250, 252, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        /* 水波彌散柔光背景 Effect */
+        .ambient-blob-1 {
+            background: radial-gradient(circle, rgba(167, 243, 208, 0.5) 0%, rgba(204, 251, 241, 0) 70%);
+        }
+        .ambient-blob-2 {
+            background: radial-gradient(circle, rgba(186, 230, 253, 0.5) 0%, rgba(224, 242, 254, 0) 70%);
+        }
+        .ambient-blob-3 {
+            background: radial-gradient(circle, rgba(209, 250, 229, 0.6) 0%, rgba(236, 253, 245, 0) 70%);
+        }
+
+        /* 微漸層文字 */
+        .gradient-text {
+            background: linear-gradient(135deg, #0d7a5f 0%, #0284c7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 滾動條優化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-emerald-100 selection:text-emerald-800 relative overflow-x-hidden">
+
+    <!-- 動態背景彌散柔光 Blobs -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] ambient-blob-1 rounded-full animate-blob filter blur-3xl opacity-70"></div>
+        <div class="absolute top-[30%] right-[-10%] w-[700px] h-[700px] ambient-blob-2 rounded-full animate-blob animation-delay-2000 filter blur-3xl opacity-70"></div>
+        <div class="absolute bottom-[-10%] left-[20%] w-[650px] h-[650px] ambient-blob-3 rounded-full animate-blob animation-delay-4000 filter blur-3xl opacity-70"></div>
+    </div>
+
+    <!-- 頂部懸浮導覽列 (Responsive Floating Navbar) -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-3">
+            <div class="glass-nav rounded-2xl px-5 py-3 flex items-center justify-between shadow-sm">
+                <!-- 慈濟大學標準 LOGO 與 系所名稱 -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <svg class="h-10 w-auto" viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="tzuChiGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#22c55e" />
+                                    <stop offset="50%" stop-color="#0d7a5f" />
+                                    <stop offset="100%" stop-color="#064e3b" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M 80,125 C 50,120 20,95 10,60 C 15,85 40,110 80,125 Z" fill="url(#tzuChiGreen)" opacity="0.9"/>
+                            <path d="M 80,125 C 40,115 15,80 15,45 C 25,70 50,100 80,125 Z" fill="url(#tzuChiGreen)" opacity="0.8"/>
+                            <path d="M 80,125 C 30,105 10,65 20,30 C 30,55 60,90 80,125 Z" fill="url(#tzuChiGreen)" opacity="0.7"/>
+                            <path d="M 80,125 C 20,90 10,45 28,15 C 38,40 65,80 80,125 Z" fill="url(#tzuChiGreen)" opacity="0.6"/>
+                            <path d="M 80,125 C 110,120 140,95 150,60 C 145,85 120,110 80,125 Z" fill="url(#tzuChiGreen)" opacity="0.9"/>
+                            <path d="M 80,125 C 120,115 145,80 145,45 C 135,70 110,100 80,125 Z" fill="url(#tzuChiGreen)" opacity="0.8"/>
+                            <path d="M 80,125 C 130,105 150,65 140,30 C 130,55 100,90 80,125 Z" fill="url(#tzuChiGreen)" opacity="0.7"/>
+                            <path d="M 80,125 C 140,90 150,45 132,15 C 122,40 95,80 80,125 Z" fill="url(#tzuChiGreen)" opacity="0.6"/>
+                            <path d="M 80,20 C 50,40 45,70 80,115 C 115,70 110,40 80,20 Z" fill="url(#tzuChiGreen)"/>
+                            <path d="M 80,35 L 88,50 L 98,55 L 86,65 L 80,85 L 74,65 L 62,55 L 72,50 Z" fill="#ffffff"/>
+                            <circle cx="80" cy="32" r="5" fill="#ffffff"/>
+                        </svg>
+                    </div>
+
+                    <div class="flex flex-col border-l border-slate-300 pl-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-serif text-xl sm:text-2xl font-bold tracking-widest text-slate-800 leading-none">慈濟大學</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full border border-emerald-200">經營管理學系</span>
+                        </div>
+                        <span class="text-[9px] sm:text-[10px] tracking-wider text-slate-500 font-sans uppercase font-medium mt-0.5">TZU CHI UNIVERSITY</span>
+                    </div>
+                </a>
+
+                <!-- 桌面端導覽連結 -->
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <a href="#about" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/50 rounded-xl transition">本系特色</a>
+                    <a href="#cores" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/50 rounded-xl transition">四核心軸線</a>
+                    <a href="#labs" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/50 rounded-xl transition">特色場域</a>
+                    <a href="#career" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/50 rounded-xl transition">職涯地圖</a>
+                    <a href="#contact" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/50 rounded-xl transition">聯絡資訊</a>
+                    <a href="#contact" class="ml-2 px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-sm transition">立即諮詢</a>
+                </div>
+
+                <!-- 行動端選單按鈕 -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100/60 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+
+            <!-- 行動端選單展開 -->
+            <div id="mobile-menu" class="hidden md:hidden mt-2 glass-card rounded-2xl p-4 shadow-lg flex flex-col space-y-2">
+                <a href="#about" onclick="toggleMobileMenu()" class="px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-emerald-50 rounded-xl">本系特色</a>
+                <a href="#cores" onclick="toggleMobileMenu()" class="px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-emerald-50 rounded-xl">四核心軸線</a>
+                <a href="#labs" onclick="toggleMobileMenu()" class="px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-emerald-50 rounded-xl">特色場域</a>
+                <a href="#career" onclick="toggleMobileMenu()" class="px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-emerald-50 rounded-xl">職涯地圖</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-emerald-50 rounded-xl">聯絡資訊</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主視覺區塊 (Hero Section) -->
+    <section class="relative pt-36 pb-20 md:pt-48 md:pb-32 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- 文字標題區 -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-50/80 border border-emerald-200/60 text-emerald-800 text-xs sm:text-sm font-medium backdrop-blur-md shadow-sm">
+                        <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span>融合人文素養與跨域管理專業</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-tight">
+                        培育具備利他精神與<br class="hidden sm:inline">
+                        <span class="gradient-text">永續競爭力</span> 的卓越管理人才
+                    </h1>
+
+                    <p class="text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 text-slate-600 leading-relaxed font-light">
+                        慈濟大學經營管理學系以國際視野、倫理實踐、數據決策與創新創業為核心，打造智慧經營與利他實踐兼備的專業學習環境。
+                    </p>
+
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#cores" class="w-full sm:w-auto px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-2xl shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:shadow-emerald-600/30 transition-all text-center">
+                            探索培育軸線 <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                        <a href="#labs" class="w-full sm:w-auto px-7 py-3.5 glass-card hover:bg-white/90 text-slate-700 border border-slate-200/80 font-medium rounded-2xl transition-all text-center">
+                            巡覽特色教室 <i class="fa-solid fa-compass ml-1.5 text-slate-400"></i>
+                        </a>
+                    </div>
+
+                    <!-- 亮點數據 -->
+                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-slate-200/60 max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold text-slate-800">100%</div>
+                            <div class="text-xs text-slate-500 mt-1">企業實習機會</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold text-slate-800">4 大</div>
+                            <div class="text-xs text-slate-500 mt-1">核心專業軸線</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold text-slate-800">10+</div>
+                            <div class="text-xs text-slate-500 mt-1">跨國姐妹校交流</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero 視覺卡片展演區 -->
+                <div class="lg:col-span-5 relative">
+                    <div class="glass-card rounded-3xl p-6 relative z-10 shadow-xl border border-white/80 animate-float">
+                        <div class="aspect-w-16 aspect-h-11 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-teal-500/20 p-6 flex flex-col justify-between border border-emerald-100/50">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-semibold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">Vision & Ethics</span>
+                                <i class="fa-solid fa-leaf text-emerald-600 text-xl"></i>
+                            </div>
+                            <div class="my-8 space-y-2">
+                                <h3 class="text-xl font-bold text-slate-800">智慧經營 ‧ 慈悲利他</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">我們重視人本精神與商業倫理，輔以大數據分析與智慧科技，引導學生在快速變化的全球環境中，創造永續價值。</p>
+                            </div>
+                            <div class="flex items-center space-x-3 pt-4 border-t border-slate-200/50">
+                                <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold">TC</div>
+                                <div class="text-xs">
+                                    <div class="font-semibold text-slate-800">慈濟學群永續管理</div>
+                                    <div class="text-slate-500">Department of Business & Management</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 後方裝飾光圈 -->
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-emerald-300/30 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-sky-300/30 rounded-full blur-2xl pointer-events-none"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 本系沿革與願景 (About Section) -->
+    <section id="about" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 shadow-sm">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                    <div class="space-y-5">
+                        <span class="text-emerald-600 font-semibold text-sm tracking-wider uppercase">About Department</span>
+                        <h2 class="text-3xl font-bold text-slate-900">引領永續商業潮流，深耕管理倫理</h2>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            慈濟大學經營管理學系以「誠正信實」為創系基石，因應全球數位轉型與 ESG 永續營運趨勢，致力培育具備國際視野、創新思維及利他情懷的現代高階管理人才。
+                        </p>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            我們結合慈濟志業豐富的全球資源與慈濟醫院、人文志業等產業鏈，提供無縫接軌的企業實習與跨國交流，實現學用合一的極致教學體驗。
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-5 glass-card rounded-2xl border border-white/60 space-y-2">
+                            <i class="fa-solid fa-earth-americas text-2xl text-emerald-600"></i>
+                            <h4 class="font-bold text-slate-800">全球永續視野</h4>
+                            <p class="text-xs text-slate-500">掌握 ESG 與綠色供應鏈趨勢</p>
+                        </div>
+                        <div class="p-5 glass-card rounded-2xl border border-white/60 space-y-2">
+                            <i class="fa-solid fa-chart-line text-2xl text-teal-600"></i>
+                            <h4 class="font-bold text-slate-800">數據驅動決策</h4>
+                            <p class="text-xs text-slate-500">掌握商業智慧與 AI 管理應用</p>
+                        </div>
+                        <div class="p-5 glass-card rounded-2xl border border-white/60 space-y-2">
+                            <i class="fa-solid fa-heart-handshake text-2xl text-sky-600"></i>
+                            <h4 class="font-bold text-slate-800">人文利他倫理</h4>
+                            <p class="text-xs text-slate-500">強調企業社會責任與誠信</p>
+                        </div>
+                        <div class="p-5 glass-card rounded-2xl border border-white/60 space-y-2">
+                            <i class="fa-solid fa-lightbulb text-2xl text-amber-500"></i>
+                            <h4 class="font-bold text-slate-800">實務創新創業</h4>
+                            <p class="text-xs text-slate-500">個案教學與智慧場域實作</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 四核心培育軸線 (4 Core Pathways) -->
+    <section id="cores" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-emerald-600 font-semibold text-sm tracking-wider uppercase">Core Pillars</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">四大核心培育軸線</h2>
+                <p class="text-slate-600 text-sm sm:text-base">全方位建構學生面對未來的關鍵營運能力與跨領域視野</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 軸線 1 -->
+                <div class="glass-card glass-card-hover rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-100/80 text-emerald-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">組織營運與行銷決策</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            涵蓋企業策略、消費心理學、數位行銷與整合行銷傳播，訓練掌握市場趨勢與品牌經營的核心硬實力。
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 pt-4 border-t border-slate-200/50">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>品牌策略與管銷</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>消費者行為分析</li>
+                    </ul>
+                </div>
+
+                <!-- 軸線 2 -->
+                <div class="glass-card glass-card-hover rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-teal-100/80 text-teal-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">智慧商務與大數據</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            學習商業智慧 (BI)、Python 大數據分析與智慧零售實務，培養利用數據輔助商業精準決策能力。
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 pt-4 border-t border-slate-200/50">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-teal-500 mr-2"></i>商業數據探勘</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-teal-500 mr-2"></i>智慧零售系統營運</li>
+                    </ul>
+                </div>
+
+                <!-- 軸線 3 -->
+                <div class="glass-card glass-card-hover rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-sky-100/80 text-sky-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">ESG 永續與社會創新</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            深耕企業社會責任 (CSR)、環境永續管理與社會企業創業，引導學生回應永續發展目標 (SDGs)。
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 pt-4 border-t border-slate-200/50">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-sky-500 mr-2"></i>永續報告書撰寫</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-sky-500 mr-2"></i>社會企業實踐</li>
+                    </ul>
+                </div>
+
+                <!-- 軸線 4 -->
+                <div class="glass-card glass-card-hover rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-100/80 text-indigo-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                            <i class="fa-solid fa-hand-holding-medical"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">醫務與健康產業管理</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            依託慈濟醫療體系優勢，跨足醫院營運、長照產業管理與健康事業創新，掌握龐大健康大健康商機。
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 pt-4 border-t border-slate-200/50">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-indigo-500 mr-2"></i>醫療機構經營</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-indigo-500 mr-2"></i>健康產業實習接軌</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色教學場域 (Interactive Learning Spaces with Lightbox) -->
+    <section id="labs" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-emerald-600 font-semibold text-sm tracking-wider uppercase">Learning Environments</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">特色教學場域與實務實驗室</h2>
+                <p class="text-slate-600 text-sm sm:text-base">打造真實商業情境，讓學習躍然於體驗之中（點擊卡片查看詳細介紹）</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 特色場域 1 -->
+                <div onclick="openModal('modal-1')" class="glass-card glass-card-hover rounded-3xl p-6 cursor-pointer group">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-50 p-6 mb-6 flex justify-center items-center h-48">
+                        <svg class="w-32 h-32 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 200 200" fill="none">
+                            <rect x="30" y="50" width="140" height="110" rx="12" fill="#ffffff" stroke="#0d7a5f" stroke-width="4"/>
+                            <path d="M 50 50 L 50 160" stroke="#e2e8f0" stroke-width="3"/>
+                            <path d="M 150 50 L 150 160" stroke="#e2e8f0" stroke-width="3"/>
+                            <rect x="70" y="70" width="60" height="40" rx="6" fill="#ccfbf1"/>
+                            <circle cx="100" cy="90" r="12" fill="#0d7a5f"/>
+                            <path d="M 95 90 L 105 90" stroke="#ffffff" stroke-width="2"/>
+                            <path d="M 50 130 H 150" stroke="#0d7a5f" stroke-width="3"/>
+                        </svg>
+                        <span class="absolute top-3 right-3 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-semibold text-emerald-800">Smart Retail</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 group-hover:text-emerald-700 transition">智慧零售與無人商店實驗室</h3>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">引進自助結帳系統、人流熱點分析與智慧 POS，模擬真實新零售經營架構。</p>
+                    <div class="mt-4 flex items-center text-xs font-semibold text-emerald-600">
+                        <span>查看場域細節</span> <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- 特色場域 2 -->
+                <div onclick="openModal('modal-2')" class="glass-card glass-card-hover rounded-3xl p-6 cursor-pointer group">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-100 to-indigo-50 p-6 mb-6 flex justify-center items-center h-48">
+                        <svg class="w-32 h-32 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 200 200" fill="none">
+                            <ellipse cx="100" cy="110" rx="60" ry="30" fill="#ffffff" stroke="#0284c7" stroke-width="4"/>
+                            <rect x="75" y="80" width="50" height="30" rx="4" fill="#e0f2fe"/>
+                            <circle cx="50" cy="110" r="10" fill="#0369a1"/>
+                            <circle cx="150" cy="110" r="10" fill="#0369a1"/>
+                            <circle cx="100" cy="145" r="10" fill="#0369a1"/>
+                        </svg>
+                        <span class="absolute top-3 right-3 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-semibold text-sky-800">Case Study</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 group-hover:text-sky-700 transition">哈佛級哈佛式個案研討室</h3>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">階梯式互動討論空間，配備環景顯示幕，鍛鍊商業個案決策與辯證思維。</p>
+                    <div class="mt-4 flex items-center text-xs font-semibold text-sky-600">
+                        <span>查看場域細節</span> <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- 特色場域 3 -->
+                <div onclick="openModal('modal-3')" class="glass-card glass-card-hover rounded-3xl p-6 cursor-pointer group">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-100 to-orange-50 p-6 mb-6 flex justify-center items-center h-48">
+                        <svg class="w-32 h-32 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 200 200" fill="none">
+                            <rect x="40" y="100" width="120" height="40" rx="6" fill="#ffffff" stroke="#d97706" stroke-width="4"/>
+                            <path d="M 60 100 C 60 70, 140 70, 140 100" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+                            <path d="M 140 110 H 160 C 165 110, 165 125, 140 125" stroke="#d97706" stroke-width="4"/>
+                            <path d="M 80 60 Q 85 40 80 30" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M 100 60 Q 105 40 100 30" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        <span class="absolute top-3 right-3 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-semibold text-amber-800">Social Enterprise</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 group-hover:text-amber-700 transition">「知足」學生創新創業實務咖啡館</h3>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">由學生團隊自主營運，體驗產品開發、財務成本管控與客戶關係管理。</p>
+                    <div class="mt-4 flex items-center text-xs font-semibold text-amber-600">
+                        <span>查看場域細節</span> <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- 特色場域 4 -->
+                <div onclick="openModal('modal-4')" class="glass-card glass-card-hover rounded-3xl p-6 cursor-pointer group">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-100 to-pink-50 p-6 mb-6 flex justify-center items-center h-48">
+                        <svg class="w-32 h-32 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 200 200" fill="none">
+                            <rect x="40" y="40" width="120" height="80" rx="8" fill="#ffffff" stroke="#a855f7" stroke-width="4"/>
+                            <path d="M 100 120 L 100 160" stroke="#a855f7" stroke-width="4"/>
+                            <path d="M 70 160 L 130 160" stroke="#a855f7" stroke-width="4"/>
+                            <path d="M 60 70 L 90 95 L 140 60" stroke="#c084fc" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                        <span class="absolute top-3 right-3 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-semibold text-purple-800">Communication</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 group-hover:text-purple-700 transition">簡報溝通與談判特訓教室</h3>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">專業多重影音錄製與肢體語言分析設備，精準培訓商務溝通與簡報魅力。</p>
+                    <div class="mt-4 flex items-center text-xs font-semibold text-purple-600">
+                        <span>查看場域細節</span> <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- 特色場域 5 -->
+                <div onclick="openModal('modal-5')" class="glass-card glass-card-hover rounded-3xl p-6 cursor-pointer group md:col-span-2 lg:col-span-2">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-100 via-teal-50 to-sky-100 p-6 mb-6 flex justify-center items-center h-48">
+                        <svg class="w-40 h-32 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 240 200" fill="none">
+                            <circle cx="120" cy="100" r="55" fill="#ffffff" stroke="#0d7a5f" stroke-width="4"/>
+                            <ellipse cx="120" cy="100" rx="55" ry="20" stroke="#0d7a5f" stroke-width="2"/>
+                            <path d="M 120 45 L 120 155" stroke="#0d7a5f" stroke-width="2"/>
+                            <path d="M 45 100 C 45 70, 195 70, 195 100" stroke="#0d7a5f" stroke-width="2"/>
+                        </svg>
+                        <span class="absolute top-3 right-3 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-semibold text-emerald-800">Global Hub</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 group-hover:text-emerald-700 transition">國際遠距雙向視訊經營決策中心</h3>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">連線全球姊妹校與國際企業，進行跨國即時案例研討與國際商業競賽實務模擬。</p>
+                    <div class="mt-4 flex items-center text-xs font-semibold text-emerald-600">
+                        <span>查看場域細節</span> <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 職涯發展地圖 (Career Map) -->
+    <section id="career" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12">
+                <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                    <span class="text-emerald-600 font-semibold text-sm tracking-wider uppercase">Career Pathways</span>
+                    <h2 class="text-3xl font-bold text-slate-900">畢業職涯發展地圖</h2>
+                    <p class="text-slate-600 text-sm">兼具廣度與深度，培育多元職場角色的跨域經營管理專家</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <div class="text-emerald-600 font-bold text-lg mb-3 flex items-center">
+                            <i class="fa-solid fa-briefcase mr-2"></i> 企劃與營運
+                        </div>
+                        <ul class="text-xs text-slate-600 space-y-2">
+                            <li>• 經營企劃主管 / 助理</li>
+                            <li>• 專案管理師 (PMP)</li>
+                            <li>• 人力資源專員</li>
+                            <li>• 營運流程整合顧問</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <div class="text-teal-600 font-bold text-lg mb-3 flex items-center">
+                            <i class="fa-solid fa-chart-column mr-2"></i> 行銷與數據
+                        </div>
+                        <ul class="text-xs text-slate-600 space-y-2">
+                            <li>• 數位行銷企劃師</li>
+                            <li>• 商業智慧 (BI) 分析師</li>
+                            <li>• 品牌經營專員</li>
+                            <li>• 電商平台營運經理</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <div class="text-sky-600 font-bold text-lg mb-3 flex items-center">
+                            <i class="fa-solid fa-leaf mr-2"></i> ESG 與永續
+                        </div>
+                        <ul class="text-xs text-slate-600 space-y-2">
+                            <li>• ESG 永續管理師</li>
+                            <li>• 企業社會責任 (CSR) 專員</li>
+                            <li>• 碳盤查與永續顧問</li>
+                            <li>• 社會企業創業家</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <div class="text-indigo-600 font-bold text-lg mb-3 flex items-center">
+                            <i class="fa-solid fa-hospital-user mr-2"></i> 醫療與健康
+                        </div>
+                        <ul class="text-xs text-slate-600 space-y-2">
+                            <li>• 醫療機構行政管理師</li>
+                            <li>• 健康產業專案經理</li>
+                            <li>• 長照機構經營營運幹部</li>
+                            <li>• 醫務企劃專員</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡資訊與諮詢 (Contact Footer Section) -->
+    <section id="contact" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 shadow-md">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+                    <!-- 聯絡資訊 -->
+                    <div class="space-y-6">
+                        <div>
+                            <span class="text-emerald-600 font-semibold text-sm tracking-wider uppercase">Contact Us</span>
+                            <h2 class="text-3xl font-bold text-slate-900 mt-1">歡迎聯繫慈濟大學經營管理學系</h2>
+                            <p class="text-slate-600 text-sm mt-2">無論是招生諮詢、產學合作或學術交流，我們竭誠為您服務。</p>
+                        </div>
+
+                        <div class="space-y-4 text-sm text-slate-700">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa-solid fa-location-dot text-emerald-600 text-lg mt-1"></i>
+                                <span>97004 花蓮市中央路三段701號 (慈濟大學 校本部/校區)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-solid fa-phone text-emerald-600 text-lg"></i>
+                                <span>(03) 856-5301 轉分機 2541 / 2542</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-solid fa-envelope text-emerald-600 text-lg"></i>
+                                <span>bm@gms.tcu.edu.tw</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-solid fa-clock text-emerald-600 text-lg"></i>
+                                <span>週一至週五 08:00 - 17:30</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition">
+                                <i class="fa-solid fa-globe"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 諮詢表單 -->
+                    <form onsubmit="event.preventDefault(); alert('訊息已送出，我們將盡快與您聯繫！');" class="space-y-4 bg-white/70 p-6 sm:p-8 rounded-2xl border border-white/80 shadow-inner">
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">線上諮詢與留言</h3>
+                        
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">姓名 / Name</label>
+                            <input type="text" required placeholder="請輸入您的姓名" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">電子郵件 / Email</label>
+                            <input type="email" required placeholder="example@email.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">諮詢主題 / Subject</label>
+                            <select class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                                <option>高中生/家長 招生入學諮詢</option>
+                                <option>轉學考 / 碩士班報考</option>
+                                <option>企業產學合作 / 實習媒合</option>
+                                <option>其他諮詢</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">留言內容 / Message</label>
+                            <textarea rows="3" required placeholder="請輸入您想了解的細節..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl shadow-md transition">
+                            確認送出 <i class="fa-solid fa-paper-plane ml-1 text-xs"></i>
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- Footer 版權宣言 -->
+            <div class="text-center mt-12 text-xs text-slate-400">
+                <p>© 2026 慈濟大學 經營管理學系 Department of Business and Management, Tzu Chi University. All Rights Reserved.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal 彈出視窗組件 (Lightbox Modals) -->
+    <div id="modal-backdrop" onclick="closeModal()" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 hidden transition-opacity"></div>
+
+    <!-- Modal 1: 智慧零售 -->
+    <div id="modal-1" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-lg glass-card rounded-3xl p-6 sm:p-8 z-50 hidden shadow-2xl border border-white">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-slate-800">智慧零售與無人商店實驗室</h3>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+        <div class="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p>本實驗室配置與新零售產業無縫接軌的各類前端硬體與後端分析系統，包括自助結帳 Kiosk、RFID 標籤感測器、人流熱圖 AI 鏡頭與智慧 POS 機。</p>
+            <p>學生可在此實際演練產品上架策略、進行消費者購買動線體驗設計，並藉由後端銷售數據庫即時分析銷售轉換率，完成從理論到真實商業經營的完整訓練。</p>
+        </div>
+        <div class="mt-6 flex justify-end">
+            <button onclick="closeModal()" class="px-5 py-2 bg-emerald-600 text-white text-xs font-medium rounded-xl">關閉視窗</button>
+        </div>
+    </div>
+
+    <!-- Modal 2: 個案研討室 -->
+    <div id="modal-2" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-lg glass-card rounded-3xl p-6 sm:p-8 z-50 hidden shadow-2xl border border-white">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-slate-800">哈佛級哈佛式個案研討室</h3>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+        <div class="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p>比照世界頂尖商學院規格打造，採用半圓形階梯式座席設計，縮短師生與同儕間的互動距離。</p>
+            <p>教室配置多路高畫質智慧追蹤鏡頭與即時投屏系統，專利於推動「個案教學法 (Case Study Method)」，鼓勵學生從高階管理者思維出發，進行激烈的商業策略辯論與實務決策模擬。</p>
+        </div>
+        <div class="mt-6 flex justify-end">
+            <button onclick="closeModal()" class="px-5 py-2 bg-sky-600 text-white text-xs font-medium rounded-xl">關閉視窗</button>
+        </div>
+    </div>
+
+    <!-- Modal 3: 知足咖啡館 -->
+    <div id="modal-3" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-lg glass-card rounded-3xl p-6 sm:p-8 z-50 hidden shadow-2xl border border-white">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-slate-800">「知足」學生創新創業實務咖啡館</h3>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+        <div class="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p>「知足咖啡館」為本系學生自主營運的微型實體企業實踐基地。學生團隊需親自參與產品開發、供應鏈進貨、損益表製作與顧客關係管理。</p>
+            <p>結合社會企業經營思維，部分盈餘更提撥作為在地公益基金，讓學生在掌握創業實務運作的同時，貫徹慈濟利他精神與社會責任。</p>
+        </div>
+        <div class="mt-6 flex justify-end">
+            <button onclick="closeModal()" class="px-5 py-2 bg-amber-600 text-white text-xs font-medium rounded-xl">關閉視窗</button>
+        </div>
+    </div>
+
+    <!-- Modal 4: 簡報溝通教室 -->
+    <div id="modal-4" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-lg glass-card rounded-3xl p-6 sm:p-8 z-50 hidden shadow-2xl border border-white">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-slate-800">簡報溝通與談判特訓教室</h3>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+        <div class="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p>專為高階商務溝通、商務談判與簡報演練設計。空間內配備多角度高畫質錄影設備，能完整記錄學生演練過程中的肢體語言、語調變化與眼神互動。</p>
+            <p>透過課後影音回放與老師逐格指導，系統性提升學生的表達感染力、談判籌碼分析與跨文化溝通技巧。</p>
+        </div>
+        <div class="mt-6 flex justify-end">
+            <button onclick="closeModal()" class="px-5 py-2 bg-purple-600 text-white text-xs font-medium rounded-xl">關閉視窗</button>
+        </div>
+    </div>
+
+    <!-- Modal 5: 國際遠距決策中心 -->
+    <div id="modal-5" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-lg glass-card rounded-3xl p-6 sm:p-8 z-50 hidden shadow-2xl border border-white">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-slate-800">國際遠距雙向視訊經營決策中心</h3>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+        <div class="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p>配備 4K 專業高畫質視訊會議系統、超低延遲音訊陣列與多螢幕同步顯示牆，打破地理限制。</p>
+            <p>本中心定期與美、日、東南亞等國際姊妹校進行聯合遠距授課、跨國線上商業個案競賽，並邀請海外知名企業高管進行線上記者會與產業專題講座，拓展學生零時差的全球營運視野。</p>
+        </div>
+        <div class="mt-6 flex justify-end">
+            <button onclick="closeModal()" class="px-5 py-2 bg-emerald-600 text-white text-xs font-medium rounded-xl">關閉視窗</button>
+        </div>
+    </div>
+
+    <!-- JavaScript 邏輯控制 -->
+    <script>
+        // 行動端選單開關
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Modal 彈窗控制
+        function openModal(modalId) {
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-backdrop').classList.add('hidden');
+            const modals = ['modal-1', 'modal-2', 'modal-3', 'modal-4', 'modal-5'];
+            modals.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
